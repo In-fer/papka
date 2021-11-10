@@ -1,0 +1,81 @@
+<?php
+mkdir("Lab30");
+$fil = fopen('Lab30/lab30.html','rt');
+$fil = fopen('Lab30/lab30.php','rt');
+$fil = fopen('Lab30/lab30.txt','rt');
+$fil = fopen('Lab30/registrarion.php','rt');
+file_put_contents('lab30.html','<html>
+<head>
+  </head>
+  <body>
+    <p> Вы зашли на нужную страницу</p>
+    </body>
+    </html>');
+file_put_contents('lab30.php','<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script>
+    function functBefore(){
+      $("#information").text("Ожидание данных...");
+    }
+    function funcSuccenss(data){
+      $("#information").text("");
+    if (data==0){
+      alert("Введите другие данные");}
+    else {location.href='lab30.html';}
+    }
+
+    $(document).ready(function(){
+      $("reg").bind("click",function(){
+        $.ajax({
+          url:"registration.php",
+          type: "POST",
+          data:({login:$("login").val() ,passwor:$("#passw").val() }),
+          dataType: "html",
+          beforeSend: functBefore,
+          success: funcSuccenss
+        });
+      });
+    });
+    </script>
+    </head>
+    <body>
+      <form>
+        <p> Введите логин</p>
+        <input type="text" id="login"/>
+        <p> Введите пароль</p>
+        <input type="password" id="passw"/>
+        <input type="button" value="Регистрация" id="reg"/>
+        <input type="button" value="Вход" id="vxodd"/>
+        <div id="information"></div>
+      </form>
+    </body>
+  </html>');
+  file_put_contents('registration.php','<?php
+  $a=$_POST["login"];
+  $b=$_POST["passwor"];
+  $file=fopen('Lab30.txt','rt');
+  if($file){
+    while(!feof($file)){
+      $text=fgets($file,900);
+    }
+    if(strops($text,$a." / ".$b) !==false)
+      {
+        echo "0";
+      }
+    else {
+      fclose($file);
+      $file2=fopen('Lab30.txt','a');
+        $text2="/".$a." / ".$b."/";
+        $result=fwrite($file2,$text2);
+        if($result) {
+          echo "1";
+          fclose($file2);
+        }
+        else {echo ("Ошибка при записи в файл");
+          fclose($file2);}
+    }
+  }
+  else echo ("Ошибка при открытии файла");
+  ?>');
+?>

@@ -1,0 +1,130 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<form action="" method="post">
+<p>
+  <input type="text" name="text1"/>
+  <input type="text" name="text2"/>
+  <input type="text" name="text3"/>
+  <input type="submit" value="Вывести">
+</p>
+<?php
+if (empty($_POST[text1]))
+echo ("Введите имя");
+elseif (!(empty($_POST[text1])))
+echo $_POST[text1];
+elseif (empty($_POST[text2]))
+echo ("Введите фамилию");
+elseif (!(empty($_POST[text2])))
+echo $_POST[text2];
+elseif (empty($_POST[text3]))
+echo ("Введите отчество");
+elseif (!(empty($_POST[text3])))
+echo $_POST[text3];
+?>
+
+
+<form action="" method="post">
+  <p>
+    <input type="checkbox" name="element[]" value="blue"/>Синий
+    <input type="checkbox" name="element[]" value="red"/>Красный
+    <input type="checkbox" name="element[]" value="yellow"/>Желтый
+    <input type="checkbox" name="element[]" value="green"/>Зеленый
+    <input type="submit" value="Вывести">
+  </p>
+<?php
+  $elem=$_POST['element'];
+  if (empty($elem)) {
+    echo ("Вы ничего не выбрали");
+  }
+  else{
+    $N = count($elem);
+    for($i=0;$i<$N;$i++)
+    {
+      echo ($elem[$i] . " ");
+    }
+  }
+?>
+
+
+<form action="formdata" method="post" name="form1">
+ <p><select name="list1">
+  <option>Выберите из списка</option>
+  <option>Санкт-Петербург</option>
+  <option>Москва</option>
+  <option>Новгород</option>
+  <option>Орёл</option>
+  <option>Новосибирск</option>
+ </select>
+ <input type="submit" value="Отправить"></p>
+</form>
+<?php
+echo $_POST[list1];
+?>
+
+
+<form action="" method="post">
+  <p>
+    Здравствуйте, выберете ваше имя:
+    <input type="checkbox" name="element[]" value="pasha"/>Паша
+    <input type="checkbox" name="element[]" value="Vlad"/>Влад
+    <input type="checkbox" name="element[]" value="danya"/>Даня
+    <input type="checkbox" name="element[]" value="net"/>Меня здесь нет, досвидания
+    <input type="submit" value="Вывести">
+  </p>
+<?php
+  $elem=$_POST['element'];
+  if (empty($elem)) {
+    echo ("Вы ничего не выбрали");
+  }
+  else{
+    $N = count($elem);
+    for($i=0;$i<$N;$i++)
+    {
+      echo ($elem[$i] . " ");
+    }
+  }
+?>
+
+
+<form action="" method="post">
+  <p>
+    Сколько вам лет?
+    <input type="radio" name="element" value="menee"/>менее 20 лет
+    <input type="radio" name="element" value="dva"/>20-25
+    <input type="radio" name="element" value="tri"/>26-30
+    <input type="radio" name="element" value="bolee"/>более 30 лет
+    <input type="submit" value="Вывести">
+  </p>
+  <?php
+  echo ("Вам " . $_POST[element] . "лет")
+  ?>
+
+
+<?php
+if (!isset($_REQUEST['age'])) {
+  ?>
+  <p>Сколько вам лет?</p>
+  <form action="" method="GET">
+    <input type="text" name="age">
+    <input type="submit">
+    </form>
+    <?php
+  }
+  ?>
+  <?php
+  if (isset($_REQUEST['age'])) {
+    $age = strip_tags($_REQUEST['age']);
+    echo 'Ваш возраст:' . $age;
+  }
+  ?>
+
+
+  <form action="" method="GET">
+  	<input name="name" value="<?php if (isset($_GET['name'])) echo $_GET['name']; ?>">
+  	<input type="submit">
+  </form>
+  <?php
+  	if (isset($_REQUEST['submit'])) {
+  		$name = $_REQUEST['name'];
+  		echo $name;
+  	}
+  ?>
